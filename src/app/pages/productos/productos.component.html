@@ -1,0 +1,73 @@
+<section class="container m-auto text-center py-5">
+    <h2 class="text-center mb-5">Nuestros Productos</h2>
+    
+    <div class="row mb-4 justify-content-center text-center align-items-center mx-auto">
+      <div class="col-auto">
+        <div class="btn-group" role="group">
+          <button 
+            (click)="filterByCategory('Todos')" 
+            class="btn" 
+            [class.btn-primary]="selectedCategory === 'Todos'"
+            [class.btn-outline-secondary]="selectedCategory !== 'Todos'">
+            Todos
+          </button>
+          <button 
+            (click)="filterByCategory('Premium')" 
+            class="btn" 
+            [class.btn-primary]="selectedCategory === 'Premium'"
+            [class.btn-outline-secondary]="selectedCategory !== 'Premium'">
+            Premium
+          </button>
+          <button 
+            (click)="filterByCategory('Estándar')" 
+            class="btn" 
+            [class.btn-primary]="selectedCategory === 'Estándar'"
+            [class.btn-outline-secondary]="selectedCategory !== 'Estándar'">
+            Estándar
+          </button>
+          <button 
+            (click)="filterByCategory('Básico')" 
+            class="btn" 
+            [class.btn-primary]="selectedCategory === 'Básico'"
+            [class.btn-outline-secondary]="selectedCategory !== 'Básico'">
+            Básico
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row d-flex text-center mx-auto justify-content-center align-items-center">
+      @for (product of filteredProducts; track product.id) {
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img 
+              [src]="product.imageUrl" 
+              class="card-img-top" 
+              [alt]="product.name"
+            >
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text text-muted">{{ product.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="h4 text-primary mb-0">
+                  ${{ product.price  }}
+                </span>
+                <div>
+                  @if (product.inStock) {
+                    <span class="badge bg-success">Disponible</span>
+                  } @else {
+                    <span class="badge bg-danger">Sin Stock</span>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-primary w-100">
+                Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
